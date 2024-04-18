@@ -37,7 +37,7 @@ export class SentimentalAnalysisService {
     }
   }
 
-  private async saveSentimentAnalysis(sentimentalData: SentimentalAnalysisResponseDto) {
+  private async saveSentimentAnalysis(sentimentalData: SentimentalAnalysisResponseDto): Promise<void> {
     try {
       const newSentimentAnalysis = new this.sentimentalAnalysisModel({
         documentSentiment: sentimentalData.documentSentiment,

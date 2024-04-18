@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus, Inject, Query } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Inject, Post, Query } from '@nestjs/common';
 import { SentimentalAnalysisService } from './sentimental-analysis.service';
 import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SentimentalAnalysisDto, SentimentalAnalysisResponseDto } from '../dto/sentimental.dto';
@@ -11,14 +11,14 @@ export class SentimentalAnalysisController {
     private readonly sentimentalAnalysisService: SentimentalAnalysisService
   ) { }
 
-  @ApiTags('Get sentimental-analysis by query message')
+  @ApiTags('Post sentimental-analysis by query message')
   @ApiQuery({ name: 'message', required: true, type: String })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Returns the sentiment analysis result',
     type: SentimentalAnalysisResponseDto
   })
-  @Get()
+  @Post()
   async getSentimentalAnalysis(@Query('message') message: string): Promise<SentimentalAnalysisResponseDto> {
     try {
       return await this.sentimentalAnalysisService.getSentimentalAnalysis(message);
