@@ -39,4 +39,4 @@ CMD [ "node", "dist/main.js" ]
 # CMD ["node", "index.js"]
 
 # Expose port 8080 of your microservice / server.
-EXPOSE 8080
+EXPOSE 3000:3000

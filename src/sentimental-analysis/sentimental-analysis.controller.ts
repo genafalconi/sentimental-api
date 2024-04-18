@@ -42,4 +42,19 @@ export class SentimentalAnalysisController {
       throw new HttpException(`An error occurred while getting saved sentimental analysis. Error: ${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  @ApiTags('Check for healthy service')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Returns a boolean if the service is active',
+    type: Boolean,
+  })
+  @Get('/')
+  getHealthySentimentalAnalysis(): boolean {
+    try {
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }
