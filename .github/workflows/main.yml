@@ -31,8 +31,3 @@ jobs:
       run: |-
         docker tag $IMAGE_NAME:latest $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
         docker push $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-
-    - name: Push Docker Image to Artifact Registry
-      run: |-
-        docker tag $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        docker push $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
