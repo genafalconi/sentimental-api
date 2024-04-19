@@ -46,7 +46,7 @@ export class SentimentalAnalysisController {
   @ApiTags('Check for healthy service')
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'Returns a boolean if the service is active',
+    description: 'Returns a boolean if the service is active and healthy',
     type: Boolean,
   })
   @Get('/')
