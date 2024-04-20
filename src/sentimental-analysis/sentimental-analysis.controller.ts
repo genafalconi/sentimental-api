@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, HttpStatus, Inject, Post, Query } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus, Inject, Logger, Post, Query } from '@nestjs/common';
 import { SentimentalAnalysisService } from './sentimental-analysis.service';
 import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SentimentalAnalysisDto, SentimentalAnalysisResponseDto } from '../dto/sentimental.dto';
@@ -52,8 +52,10 @@ export class SentimentalAnalysisController {
   @Get('/')
   getHealthySentimentalAnalysis(): boolean {
     try {
+      Logger.log('Status service is active', 'getHealthySentimentalAnalysis');
       return true;
     } catch (error) {
+      Logger.log('Status service is unactive', 'getHealthySentimentalAnalysis');
       return false;
     }
   }
