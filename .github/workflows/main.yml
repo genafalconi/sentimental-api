@@ -11,7 +11,8 @@ jobs:
       PROJECT_ID: sentimental-analysis-api
       REGION: southamerica-east1
       SERVICE: sentimental-api
-      
+      SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -34,12 +35,15 @@ jobs:
         docker tag $IMAGE_NAME:latest $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
         docker push $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
 
+    - name: Set service name
+      run: echo "::set-env name=SERVICE::$SERVICE"
+
     - name: Deploy container image to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v1
       with:
-        service: sentimental-api
-        image: southamerica-east1-docker.pkg.dev/sentimental-analysis-api/images/sentimental-api:latest
-        region: southamerica-east1
+        service: $SERVICE
+        image: $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
+        region: $REGION
       env:
         PROJECT_ID: $PROJECT_ID
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
