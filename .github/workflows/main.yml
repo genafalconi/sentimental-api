@@ -38,9 +38,9 @@ jobs:
     - name: Deploy container image to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v1
       with:
-        service: $SERVICE
-        image: $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
-        region: $REGION
+        service: sentimental-api
+        image: southamerica-east1-docker.pkg.dev/sentimental-analysis-api/images/sentimental-api:latest
+        region: southamerica-east1
       env:
         PROJECT_ID: $PROJECT_ID
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
