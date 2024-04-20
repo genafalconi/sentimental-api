@@ -38,7 +38,7 @@ jobs:
       uses: google-github-actions/deploy-cloudrun@v1
       with:
         service: $SERVICE
-        image: gcr.io/$PROJECT_ID/$SERVICE:$COMMIT_SHA
+        image: $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
         region: $REGION
       env:
         PROJECT_ID: $PROJECT_ID
