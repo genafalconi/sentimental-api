@@ -40,5 +40,6 @@ jobs:
       with:
         service: sentimental-api
         image: southamerica-east1-docker.pkg.dev/sentimental-analysis-api/images/sentimental-api:latest
+        region: southamerica-east1
       env:
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
