@@ -27,12 +27,6 @@ COPY . .
 # (Skip for Node.js Projects)
 RUN npm run build
 
-# Copy the service account key file into the container.
-COPY sentimental-analysis-api-99b3c787efd4.json /usr/src/app/sentimental-analysis-api-99b3c787efd4.json
-
-# Set the GOOGLE_APPLICATION_CREDENTIALS environment variable to point to the key file.
-ENV GOOGLE_APPLICATION_CREDENTIALS="/usr/src/app/sentimental-analysis-api-99b3c787efd4.json"
-
 # Start the server using the production build for:
 # Nest.js:
 CMD [ "node", "dist/main.js" ]
