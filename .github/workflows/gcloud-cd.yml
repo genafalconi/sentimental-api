@@ -36,11 +36,9 @@ jobs:
         docker push $REGION-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
 
     - name: Deploy container image to Cloud Run
-      uses: google-github-actions/deploy-cloudrun@v1
+      uses: google-github-actions/deploy-cloudrun@v2
       with:
         service: sentimental-api
         image: southamerica-east1-docker.pkg.dev/sentimental-analysis-api/images/sentimental-api:latest
-        region: southamerica-east1
-        port: 3000
       env:
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
