@@ -1,7 +1,7 @@
 # Base image.
 FROM node:18-alpine
 
-# Set the Enviournment to production
+# Set the Environment to production
 ENV NODE_ENV production
 ENV HOSTNAME "0.0.0.0"
 ENV HOST 0.0.0.0
@@ -13,7 +13,7 @@ WORKDIR /usr/src/app
 # A wildcard is used to copy package.json AND package-lock.json.
 COPY package*.json ./
 
-# Install nestjs which is required for bulding the Nest.js project.
+# Install nestjs which is required for building the Nest.js project.
 # (Skip for Node.js Projects)
 RUN npm install -g @nestjs/cli
 
@@ -24,24 +24,23 @@ RUN npm install --omit=dev
 COPY . .
 
 # Create a "dist" folder with the production build.
-#(Skip for Node.js Projects)
+# (Skip for Node.js Projects)
 RUN npm run build
 
-COPY sentimental-analysis-api-99b3c787efd4.json C:/Users/genar/Downloads/sentimental-analysis-api-99b3c787efd4.json
+# Copy the service account key file into the container.
+COPY sentimental-analysis-api-99b3c787efd4.json /usr/src/app/sentimental-analysis-api-99b3c787efd4.json
 
 # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable to point to the key file.
-ENV GOOGLE_APPLICATION_CREDENTIALS="C:/Users/genar/Downloads/sentimental-analysis-api-99b3c787efd4.json"
-
+ENV GOOGLE_APPLICATION_CREDENTIALS="/usr/src/app/sentimental-analysis-api-99b3c787efd4.json"
 
 # Start the server using the production build for:
-
 # Nest.js:
 CMD [ "node", "dist/main.js" ]
- 
- # ___OR___
+
+# ___OR___
 
 # Node.js:
 # CMD ["node", "index.js"]
 
 # Expose port 8080 of your microservice / server.
-EXPOSE 3000:3000
+EXPOSE 3000
