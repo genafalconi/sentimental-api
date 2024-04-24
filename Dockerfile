@@ -27,10 +27,10 @@ COPY . .
 #(Skip for Node.js Projects)
 RUN npm run build
 
-COPY application_default_credentials.json C:/Users/genar/AppData/Roaming/gcloud/application_default_credentials.json
+COPY sentimental-analysis-api-99b3c787efd4.json C:/Users/genar/Downloads/sentimental-analysis-api-99b3c787efd4.json
 
 # Set the GOOGLE_APPLICATION_CREDENTIALS environment variable to point to the key file.
-ENV GOOGLE_APPLICATION_CREDENTIALS="C:/Users/genar/AppData/Roaming/gcloud/application_default_credentials.json"
+ENV GOOGLE_APPLICATION_CREDENTIALS="C:/Users/genar/Downloads/sentimental-analysis-api-99b3c787efd4.json"
 
 
 # Start the server using the production build for:
