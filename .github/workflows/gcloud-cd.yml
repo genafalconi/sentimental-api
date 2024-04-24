@@ -43,4 +43,4 @@ jobs:
         region: southamerica-east1
       env:
         PROJECT_ID: $PROJECT_ID
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
