@@ -1,40 +1,39 @@
 # Base image.
-FROM node:18-alpine
+FROM node:20-alpine
 
 # Set the Environment to production
 ENV NODE_ENV production
-ENV HOSTNAME "0.0.0.0"
-ENV HOST 0.0.0.0
-ENV HOST "0.0.0.0"
+
+# Set default values for build arguments
+ARG GOOGLE_CLOUD_SENTIMENTAL_API_KEY
+ARG MONGO_DB
+ARG APP_PORT
+
+# Set environment variables
+ENV GOOGLE_CLOUD_SENTIMENTAL_API_KEY=$GOOGLE_CLOUD_SENTIMENTAL_API_KEY
+ENV MONGO_DB=$MONGO_DB
+ENV APP_PORT=$APP_PORT
 
 # Create app directory.
 WORKDIR /usr/src/app
 
-# A wildcard is used to copy package.json AND package-lock.json.
-COPY package*.json ./
-
-# Install nestjs which is required for building the Nest.js project.
-# (Skip for Node.js Projects)
+# Install NestJS CLI globally
 RUN npm install -g @nestjs/cli
 
-# Installs only the dependencies and skips devDependencies.
-RUN npm install --omit=dev
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
 
-# Copy all the files to the container.
+# Install app dependencies
+RUN npm install
+
+# Bundle app source
 COPY . .
 
-# Create a "dist" folder with the production build.
-# (Skip for Node.js Projects)
+# Creates a "dist" folder with the production build
 RUN npm run build
 
-# Start the server using the production build for:
-# Nest.js:
-CMD [ "node", "dist/main.js" ]
-
-# ___OR___
-
-# Node.js:
-# CMD ["node", "index.js"]
-
-# Expose port 8080 of your microservice / server.
+# Expose the port on which the app will run
 EXPOSE 3000
+
+# Start the server using the production build
+CMD ["npm", "run", "start:prod"]

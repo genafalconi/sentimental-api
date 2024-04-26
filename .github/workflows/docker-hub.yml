@@ -26,9 +26,7 @@ jobs:
           context: .
           push: true
           tags: genafalconii/sentimental-api:latest
-      - name: Update repo description
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: genafalconii/sentimental-api
+          build-args: |
+            GOOGLE_CLOUD_SENTIMENTAL_API_KEY=${{ secrets.GOOGLE_CLOUD_SENTIMENTAL_API_KEY }}
+            MONGO_DB=${{ secrets.MONGO_DB }}
+            APP_PORT=${{ secrets.APP_PORT }}
